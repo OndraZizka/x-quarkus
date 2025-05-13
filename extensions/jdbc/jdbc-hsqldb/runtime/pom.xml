@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>quarkus-jdbc-hsqldb-parent</artifactId>
+        <groupId>io.quarkus</groupId>
+        <version>999-SNAPSHOT</version>
+    </parent>
+    <artifactId>quarkus-jdbc-hsqldb</artifactId>
+    <name>Quarkus - JDBC - HSQLDB - Runtime</name>
+    <description>Connect to the HSQLDB database via JDBC</description>
+
+    <dependencies>
+        <dependency><groupId>io.quarkus</groupId><artifactId>quarkus-arc</artifactId></dependency>
+        <dependency><groupId>io.quarkus</groupId><artifactId>quarkus-agroal</artifactId></dependency>
+        <dependency><groupId>org.graalvm.sdk</groupId><artifactId>nativeimage</artifactId><scope>provided</scope></dependency>
+
+        <dependency><groupId>org.hsqldb</groupId><artifactId>hsqldb</artifactId><version>2.7.4</version></dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-extension-maven-plugin</artifactId>
+                <configuration>
+                    <parentFirstArtifacts>
+                        <parentFirstArtifact>org.hsqldb:hsqldb</parentFirstArtifact>
+                    </parentFirstArtifacts>
+                    <capabilities>
+                        <provides>io.quarkus.jdbc.hsqldb</provides>
+                    </capabilities>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <configuration>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>io.quarkus</groupId>
+                                    <artifactId>quarkus-extension-processor</artifactId>
+                                    <version>${project.version}</version>
+                                </path>
+                            </annotationProcessorPaths>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

@@ -1,4 +1,4 @@
-package io.quarkus.jdbc.h2.runtime;
+package io.quarkus.jdbc.hsqldb.runtime;
 
 import java.util.Map;
 

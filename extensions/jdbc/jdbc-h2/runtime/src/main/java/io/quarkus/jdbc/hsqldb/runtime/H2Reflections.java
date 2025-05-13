@@ -1,4 +1,4 @@
-package io.quarkus.jdbc.h2.runtime;
+package io.quarkus.jdbc.hsqldb.runtime;
 
 import java.io.IOException;
 import java.io.InputStream;
